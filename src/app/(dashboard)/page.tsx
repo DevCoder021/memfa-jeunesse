@@ -17,6 +17,7 @@ import { getDaysRemaining } from "@/lib/dates"
 import { InteractiveCard } from "@/components/ui/interactive-card"
 import Link from "next/link"
 
+export const dynamic = 'force-dynamic';
 export default async function DashboardPage() {
   const activites = await db.activite.findMany({
     select: {
