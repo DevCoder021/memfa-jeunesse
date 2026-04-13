@@ -8,8 +8,8 @@ import logoMemfa from "../../../../assets/logo.png"
 
 export default function LoginPage() {
   const router = useRouter()
-  const [email, setEmail] = useState("admin@memfa.ci")
-  const [password, setPassword] = useState("memfa2026")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
