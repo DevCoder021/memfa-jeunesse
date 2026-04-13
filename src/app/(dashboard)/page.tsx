@@ -14,6 +14,8 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { db } from "@/lib/db"
 import { getDaysRemaining } from "@/lib/dates"
+import { InteractiveCard } from "@/components/ui/interactive-card"
+import Link from "next/link"
 
 export default async function DashboardPage() {
   const activites = await db.activite.findMany({
@@ -56,20 +58,22 @@ export default async function DashboardPage() {
             Vue d&rsquo;ensemble des activités spirituelles de la jeunesse MEMFA.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-           <Button variant="outline" className="glass hover:bg-white/80 border-white/60">
-             <CalendarDays className="mr-2 h-4 w-4" /> Calendrier
-           </Button>
-           <Button className="btn-primary-glow rounded-xl px-6">
-             + Nouvelle activité
-           </Button>
+        <div className="flex flex-col sm:flex-row w-full md:w-auto items-stretch sm:items-center gap-2 sm:gap-3">
+          <Button asChild variant="outline" className="glass hover:bg-white/80 border-white/60 w-full sm:w-auto">
+            <Link href="/calendrier">
+              <CalendarDays className="mr-2 h-4 w-4" /> Calendrier
+            </Link>
+          </Button>
+          <Button asChild className="btn-primary-glow rounded-xl px-6 w-full sm:w-auto">
+            <Link href="/activites/new">+ Nouvelle activité</Link>
+          </Button>
         </div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
         {/* Stat 1 */}
-        <div className="glass-card p-6 animate-fade-in-up animate-delay-100 relative overflow-hidden group">
+        <InteractiveCard delay={40} className="glass-card p-6 relative overflow-hidden group">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-blue-400 rounded-t-2xl"></div>
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-muted-foreground">Total Activités</span>
@@ -84,10 +88,10 @@ export default async function DashboardPage() {
             </span>
             <span className="text-xs text-muted-foreground">ce mois-ci</span>
           </div>
-        </div>
+        </InteractiveCard>
 
         {/* Stat 2 */}
-        <div className="glass-card p-6 animate-fade-in-up animate-delay-200 relative overflow-hidden">
+        <InteractiveCard delay={90} className="glass-card p-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-500 to-emerald-400 rounded-t-2xl"></div>
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-muted-foreground">À venir</span>
@@ -100,10 +104,10 @@ export default async function DashboardPage() {
             <span className="text-xs text-muted-foreground">Prochaine dans </span>
             <span className="text-xs font-semibold text-primary">12 jours</span>
           </div>
-        </div>
+        </InteractiveCard>
 
         {/* Stat 3 */}
-        <div className="glass-card p-6 animate-fade-in-up animate-delay-300 relative overflow-hidden">
+        <InteractiveCard delay={140} className="glass-card p-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500 to-amber-400 rounded-t-2xl"></div>
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-muted-foreground">Urgentes</span>
@@ -117,10 +121,10 @@ export default async function DashboardPage() {
               <AlertCircle className="h-3 w-3" /> J-7 Sortie Moyekro
             </span>
           </div>
-        </div>
+        </InteractiveCard>
 
         {/* Stat 4 */}
-        <div className="glass-card p-6 animate-fade-in-up animate-delay-400 relative overflow-hidden">
+        <InteractiveCard delay={190} className="glass-card p-6 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-purple-400 rounded-t-2xl"></div>
           <div className="flex items-center justify-between mb-4">
             <span className="text-sm font-medium text-muted-foreground">Terminées</span>
@@ -135,11 +139,11 @@ export default async function DashboardPage() {
             </span>
             <span className="text-xs text-muted-foreground">vs 2025</span>
           </div>
-        </div>
+        </InteractiveCard>
       </div>
 
       {/* Alert Banner */}
-      <div className="glass-card p-5 flex items-start gap-4 border-l-4 border-l-amber-400 bg-gradient-to-r from-amber-50/60 to-transparent animate-fade-in-up">
+      <InteractiveCard delay={240} className="glass-card p-5 flex flex-col sm:flex-row items-start gap-4 border-l-4 border-l-amber-400 bg-gradient-to-r from-amber-50/60 to-transparent">
         <div className="p-2.5 bg-amber-100 rounded-xl shrink-0">
           <AlertCircle className="h-5 w-5 text-amber-600" />
         </div>
@@ -150,16 +154,16 @@ export default async function DashboardPage() {
             Préparez le message de rappel J-7 pour le groupe WhatsApp.
           </p>
         </div>
-        <Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white rounded-xl shadow-md shadow-amber-500/20 shrink-0">
+        <Button size="sm" className="bg-amber-500 hover:bg-amber-600 text-white rounded-xl shadow-md shadow-amber-500/20 shrink-0 w-full sm:w-auto">
           <MessageCircle className="h-4 w-4 mr-2" /> Préparer le message
         </Button>
-      </div>
+      </InteractiveCard>
 
       {/* Main Content Grid */}
       <div className="grid gap-6 md:grid-cols-7">
         
         {/* Left: Upcoming Activities (4/7) */}
-        <div className="col-span-4 glass-card overflow-hidden animate-fade-in-up animate-delay-100">
+        <InteractiveCard delay={280} className="md:col-span-4 glass-card overflow-hidden">
           <div className="p-6 border-b border-white/40 flex items-center justify-between">
             <div>
               <h3 className="text-lg font-semibold text-gray-900">Activités à venir</h3>
@@ -206,13 +210,13 @@ export default async function DashboardPage() {
               </div>
             ))}
           </div>
-        </div>
+        </InteractiveCard>
 
         {/* Right: Quick Actions & Stats (3/7) */}
-        <div className="col-span-3 space-y-6 animate-fade-in-up animate-delay-200">
+        <div className="md:col-span-3 space-y-6">
           
           {/* WhatsApp Quick Send */}
-          <div className="glass-card p-6">
+          <InteractiveCard delay={320} className="glass-card p-6">
             <div className="flex items-center gap-3 mb-4">
               <div className="p-2.5 bg-green-50 rounded-xl border border-green-100/50 shrink-0">
                 <MessageCircle className="h-5 w-5 text-green-600" />
@@ -235,10 +239,10 @@ export default async function DashboardPage() {
                 <MessageCircle className="h-4 w-4 mr-2" /> Générer le message
               </Button>
             </div>
-          </div>
+          </InteractiveCard>
 
           {/* Dynamic Statistics Card */}
-          <div className="glass-card p-6">
+          <InteractiveCard delay={360} className="glass-card p-6">
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="font-semibold text-gray-900">Statistiques activités</h3>
@@ -323,10 +327,10 @@ export default async function DashboardPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </InteractiveCard>
 
           {/* Activity Progress */}
-          <div className="glass-card p-6">
+          <InteractiveCard delay={400} className="glass-card p-6">
             <h3 className="font-semibold text-gray-900 mb-4">Progression annuelle</h3>
             <div className="flex items-end gap-2 h-32 mb-4">
               {[30, 45, 60, 40, 75, 85, 65, 50, 70, 90, 55, 40].map((h, i) => (
@@ -355,7 +359,7 @@ export default async function DashboardPage() {
                 <p className="text-xs text-muted-foreground">activités réalisées</p>
               </div>
             </div>
-          </div>
+          </InteractiveCard>
         </div>
       </div>
     </div>
