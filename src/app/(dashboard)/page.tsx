@@ -1,3 +1,4 @@
+
 import { 
   CalendarDays, 
   Clock, 
@@ -16,9 +17,16 @@ import { db } from "@/lib/db"
 import { getDaysRemaining } from "@/lib/dates"
 import { InteractiveCard } from "@/components/ui/interactive-card"
 import Link from "next/link"
+import { auth } from "@/lib/auth"
+import { redirect } from "next/navigation"
 
 export const dynamic = 'force-dynamic';
 export default async function DashboardPage() {
+  const session = await auth()
+  if (!session?.user) {
+    redirect('/login')
+  }
+
   const activites = await db.activite.findMany({
     select: {
       id: true,
