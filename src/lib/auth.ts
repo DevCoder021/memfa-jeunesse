@@ -16,16 +16,6 @@ export const authConfig: NextAuthConfig = {
           return null;
         }
 
-        // Support d'un mot de passe biométrique simulé.
-        if (credentials.password === 'biometric-auth-success') {
-          return {
-            id: '1',
-            email: credentials.email as string,
-            nom: 'Admin Bureau',
-            role: 'admin',
-          };
-        }
-
         const user = await db.user.findUnique({
           where: { email: credentials.email as string },
         });
